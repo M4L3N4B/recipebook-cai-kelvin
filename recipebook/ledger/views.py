@@ -67,7 +67,7 @@ recipes = [
 def recipe_list(request):
     return render(request, 'recipe_list.html', {'recipes': recipes})
 
-def recipe_preview(request, recipe_num):
+def recipe_detail(request, recipe_num):
     if 1 <= recipe_num <= len(recipes):
         recipe = recipes[recipe_num-1]
-        return render(request, 'recipe_preview.html', {'recipe': recipe})
+        return render(request, 'recipe_detail.html', {'recipe': recipe})
