@@ -23,12 +23,14 @@ class RecipeAdmin(admin.ModelAdmin):
 class RecipeIngredientAdmin(admin.ModelAdmin):
     model = RecipeIngredient
     search_fields = ('recipe__name', 'ingredient__name', )
-    list_display = ('recipe', 'ingredient', 'quantity', )
+    list_display = ('ingredient', 'quantity', 'recipe')
     list_filter = ('recipe', 'ingredient', )
+    
+    # Creates fields when adding new a recipe ingredient
     fieldsets = [
         ('Details', {
             'fields': [
-                'recipe', ('ingredient', 'quantity'),
+                ('ingredient', 'quantity'), 'recipe'
             ],
         }),
     ]
