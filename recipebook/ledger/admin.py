@@ -8,10 +8,16 @@ class IngredientAdmin(admin.ModelAdmin):
     list_display = ('name', )
 
 
+# Allows editing of recipe ingredients while a recipe entry is being edited
+class RecipeIngredientInline(admin.TabularInline):
+    model = RecipeIngredient
+
+
 class RecipeAdmin(admin.ModelAdmin):
     model = Recipe
     search_fields = ('name', )
     list_display = ('name', )
+    inlines = [RecipeIngredientInline]
     
 
 class RecipeIngredientAdmin(admin.ModelAdmin):
