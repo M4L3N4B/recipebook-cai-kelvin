@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Recipe
 
 recipes = [
     {
@@ -65,7 +66,9 @@ recipes = [
 ]
 
 def recipe_list(request):
-    return render(request, 'recipe_list.html', {'recipes': recipes})
+    recipes = Recipe.objects.all()
+    ctx = {'recipes': recipes}
+    return render(request, 'recipe_list.html', ctx)
 
 def recipe_detail(request, recipe_num):
     if 1 <= recipe_num <= len(recipes):
