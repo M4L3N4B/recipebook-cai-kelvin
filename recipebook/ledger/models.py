@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+
 # Model for ingredients (without the recipe they come from)
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
@@ -9,7 +10,8 @@ class Ingredient(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('ingredient_detail', args=[str(self.name)])
+        return reverse('ingredient_detail', args=[str(self.id)])
+
 
 # Model for recipes (without their ingredients)
 class Recipe(models.Model):
@@ -19,7 +21,8 @@ class Recipe(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('recipe_detail', args=[str(self.name)])
+        return reverse('recipe_detail', args=[str(self.id)])
+
 
 # Model for associating recipes with their ingredients, including their quantity
 class RecipeIngredient(models.Model):
