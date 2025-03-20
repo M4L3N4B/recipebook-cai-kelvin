@@ -8,6 +8,9 @@ class Profile(models.Model):
     name = models.CharField(max_length=50)
     bio = models.CharField(max_length=255)
     
+    def __str__(self):
+        return self.name
+    
 
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
@@ -21,10 +24,7 @@ class Ingredient(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
-    author = models.ForeignKey(
-        Profile,
-        on_delete=models.CASCADE
-    )
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
