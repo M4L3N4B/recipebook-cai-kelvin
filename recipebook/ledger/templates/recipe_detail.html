@@ -4,12 +4,21 @@
 		<title>Recipe Book</title>
 	</head>
 	<body>
+		<a href="{% url 'recipe_list' %}">Return to Recipe List</a>
+		
 		<h1>{{ recipe.name }}</h1>
+		
 		<p><b>By:</b> {{ recipe.author.profile.name }}</p>
+		
 		<ul>
 			{% for ingredient in recipe.ingredients.all %}
-			<li>{{ ingredient.ingredient.name }} ({{ ingredient.quantity }})</li>
+				<li>{{ ingredient.ingredient.name }} ({{ ingredient.quantity }})</li>
+			{% empty %}
+				<li><i>No ingredients found.</i></li>
 			{% endfor %}
 		</ul>
+		
+		<p><b>Created on:</b> {{ recipe.created_on }} UTC</p>
+		<p><b>Last Updated on:</b> {{ recipe.updated_on }}</p>
 	</body>
 </html>
