@@ -9,7 +9,6 @@ class Profile(models.Model):
     bio = models.CharField(max_length=255)
     
 
-# Model for ingredients (without the recipe they come from)
 class Ingredient(models.Model):
     name = models.CharField(max_length=100)
 
@@ -20,9 +19,14 @@ class Ingredient(models.Model):
         return reverse('ingredient_detail', args=[str(self.id)])
 
 
-# Model for recipes (without their ingredients)
 class Recipe(models.Model):
     name = models.CharField(max_length=100)
+    author = models.ForeignKey(
+        Profile,
+        on_delete=models.CASCADE
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.name
@@ -31,7 +35,7 @@ class Recipe(models.Model):
         return reverse('recipe_detail', args=[str(self.id)])
 
 
-# Model for associating recipes with their ingredients, including their quantity
+# Associates recipes with their ingredients
 class RecipeIngredient(models.Model):
     quantity = models.CharField(max_length=100)
     ingredient = models.ForeignKey(
