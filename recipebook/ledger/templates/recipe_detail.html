@@ -1,7 +1,11 @@
 {% extends "base.html" %}
 
+{% block page_name %}Recipe Detail{% endblock %}
+
 {% block content %}
-	<h2>{{ recipe.name }}</h2>
+	<a href="{% url 'recipe_list' %}">Return to Recipe List</a>
+	
+	<h3>{{ recipe.name }}</h3>
 	
 	<p><b>By:</b> {{ recipe.author.profile.name }}</p>
 	
@@ -15,6 +19,4 @@
 	
 	<p><b>Created on:</b> {{ recipe.created_on }} UTC</p>
 	<p><b>Last Updated on:</b> {{ recipe.updated_on }} UTC</p>
-	
-	<a href="{% url 'recipe_list' %}">Return to Recipe List</a>
 {% endblock %}
