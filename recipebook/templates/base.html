@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{% block title %}Recipe Book{% endblock %}</title>
+	</head>
+	<body>
+		<header>
+			<h1>Recipe book</h1>
+			{% if user.is_authenticated %}
+				<form method="POST" action="{% url 'logout' %}">
+					{% csrf_token %}
+					<button type="submit">Log out</button>
+				</form>
+			{% else %}
+				<a href="{% url 'login' %}">Login</a>
+			{% endif %}
+		</header>
+		
+		{% block content %}{% endblock %}
+	</body>
+</html>
