@@ -10,8 +10,11 @@
 	
 	{% for image in recipe.images.all %}
 		<img src="{{ image.image.url }}" alt="{{ image.description }}" width="200">
+	{% empty %}
+		<p><i>No images uploaded.</i></p>
 	{% endfor %}
 	
+	<h3>Ingredients List</h3>
 	<ul>
 		{% for ingredient in recipe.ingredients.all %}
 			<li>{{ ingredient.ingredient.name }} ({{ ingredient.quantity }})</li>
@@ -22,5 +25,6 @@
 	
 	<p><b>Created on:</b> {{ recipe.created_on }} UTC</p>
 	<p><b>Last Updated on:</b> {{ recipe.updated_on }} UTC</p>
+	<p><a href="{% url 'recipe_image_add' recipe.id %}">Upload New Image</a></p>
 	
 {% endblock %}

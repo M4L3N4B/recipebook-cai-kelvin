@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Recipe, RecipeIngredient
-from .forms import RecipeForm, IngredientForm, RecipeIngredientFormSet
+from .models import Recipe, RecipeIngredient, RecipeImage
+from .forms import RecipeForm, IngredientForm, RecipeIngredientFormSet, RecipeImageForm
 
 
 @login_required
@@ -17,8 +17,8 @@ def recipe_list(request):
 
 
 @login_required
-def recipe_detail(request, recipe_id):
-    recipe = Recipe.objects.get(id=recipe_id)
+def recipe_detail(request, pk):
+    recipe = Recipe.objects.get(pk=pk)
     ctx = {'recipe': recipe}
     return render(request, 'ledger/recipe_detail.html', ctx)
 
@@ -57,3 +57,21 @@ def ingredient_add(request):
         ingredient_form = IngredientForm()
         
     return render(request, 'ledger/ingredient_add.html', {'ingredient_form': ingredient_form})
+
+
+@login_required
+def recipe_image_add(request, pk):
+    recipe = Recipe.objects.get(pk=pk)
+    
+    if request.method == 'POST':
+        image_form = RecipeImageForm(request.POST, request.FILES)
+        if image_form.is_valid():
+            image = image_form.save(commit=False)
+            image.recipe = recipe
+            image.save()
+            return redirect('recipe_detail', pk=recipe.pk)
+    else:
+        form = RecipeImageForm()
+    
+    ctx = {'form': form, 'recipe': recipe}
+    return render(request, 'ledger/recipe_image_add.html', ctx)

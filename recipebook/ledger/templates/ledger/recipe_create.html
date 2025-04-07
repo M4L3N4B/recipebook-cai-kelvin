@@ -12,9 +12,7 @@
         <h3>Ingredients List</h3>
         {{ formset.management_form }}
         {% for form in formset %}
-            <div class="ingredient-form">
-                {{ form.as_p }}
-            </div>
+            {{ form.as_p }}
         {% endfor %}
 		
 		<p><a href="{% url 'ingredient_add' %}">Add New Ingredient Type</a></p>
