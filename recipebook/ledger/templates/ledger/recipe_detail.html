@@ -6,8 +6,11 @@
 	<a href="{% url 'recipe_list' %}">Return to Recipe List</a>
 	
 	<h3>{{ recipe.name }}</h3>
-	
 	<p><b>By:</b> {{ recipe.author.profile.name }}</p>
+	
+	{% for image in recipe.images.all %}
+		<img src="{{ image.image.url }}" alt="{{ image.description }}" width="200">
+	{% endfor %}
 	
 	<ul>
 		{% for ingredient in recipe.ingredients.all %}
