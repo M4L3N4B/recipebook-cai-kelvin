@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Add New Ingredient{% endblock %}
+{% block page_name %}Add New Ingredient{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+		
+		<h3>Details</h3>
+        {{ ingredient_form.as_p }}
+		
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}

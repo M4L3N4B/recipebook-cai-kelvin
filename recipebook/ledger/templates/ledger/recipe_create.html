@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Create New Recipe{% endblock %}
+{% block page_name %}Create New Recipe{% endblock %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+		
+        {{ recipe_form.as_p }}
+		
+        <h3>Ingredients List</h3>
+        {{ formset.management_form }}
+        {% for form in formset %}
+            <div class="ingredient-form">
+                {{ form.as_p }}
+            </div>
+        {% endfor %}
+		
+		<p><a href="{% url 'ingredient_add' %}">Add New Ingredient Type</a></p>
+		
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}
